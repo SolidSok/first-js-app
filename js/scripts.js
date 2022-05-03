@@ -39,8 +39,10 @@ let pokemonlist = [
 
 for (let i=0; i < pokemonlist.length; i++) {
     if (pokemonlist[i].height > 2) {
-        document.write(pokemonlist[i].name + " is large. ");
+        document.write(`<b><u>${pokemonlist[i].name}</b></u> height: ${pokemonlist[i].height} -That's larger than normal. <br>`) ;
     } else if (pokemonlist[i].height < 2) {
-        document.write(pokemonlist[i].name + " is small. ");
+        document.write(`<b><u>${pokemonlist[i].name}</b></u> height: ${pokemonlist[i].height} -That's pretty small. <br> `);
+    } else {
+        document.write(`<b><u>${pokemonlist[i].name}</b></u> <br>`)
     }
 }

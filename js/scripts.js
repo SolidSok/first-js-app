@@ -36,3 +36,11 @@ let pokemonlist = [
         weaknesses: 'ground'
     }
 ];
+
+for (let i=0; i < pokemonlist.length; i++) {
+    if (pokemonlist[i].height > 2) {
+        document.write(pokemonlist[i].name + " is large. ");
+    } else if (pokemonlist[i].height < 2) {
+        document.write(pokemonlist[i].name + " is small. ");
+    }
+}

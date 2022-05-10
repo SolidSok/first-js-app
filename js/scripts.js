@@ -52,5 +52,11 @@ let pokemonRepository = (function () {
 })();
 
 pokemonRepository.getALL().forEach(function (pokemon) {
-    document.write('<p>' + pokemon.name + '(height: ' + pokemon.height + ')</p>')
+    if (pokemon.height > 2) {
+        document.write('<p>' + pokemon.name + '(height: ' + pokemon.height + ', That\'s pretty big.)</p>'); 
+    }else if (pokemon.height < 2) {
+        document.write('<p>' + pokemon.name + '(height: ' + pokemon.height + ', That\'s kind of small.)</p>');
+    }else{
+        document.write('<p>' + pokemon.name + '(height: ' + pokemon.height + ')</p>');
+    }   
   })()

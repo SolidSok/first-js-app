@@ -38,7 +38,10 @@ let pokemonRepository = (function () {
             }
         ];
    function add(pokemon) {
-       pokemonList.push(pokemon);
+       let pokemonKeys = ['name', 'height', 'type', 'weaknesses'];
+       if ((typeof pokemon === 'object') && (object.keys(pokemon).every((element, i) => element === pokemonKeys[i]))) {
+        pokemonList.push(pokemon);
+       }
    }
 
    function getALL() {
@@ -58,5 +61,5 @@ pokemonRepository.getALL().forEach(function (pokemon) {
         document.write('<p>' + pokemon.name + '(height: ' + pokemon.height + ', That\'s kind of small.)</p>');
     }else{
         document.write('<p>' + pokemon.name + '(height: ' + pokemon.height + ')</p>');
-    }   
+    }
   })()

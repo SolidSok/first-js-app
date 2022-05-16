@@ -38,28 +38,42 @@ let pokemonRepository = (function () {
             }
         ];
    function add(pokemon) {
-       let pokemonKeys = ['name', 'height', 'type', 'weaknesses'];
+   
        if ((typeof pokemon === 'object') && (object.keys(pokemon).every((element, i) => element === pokemonKeys[i]))) {
         pokemonList.push(pokemon);
        }
-   }
+   };
+   let pokemonKeys = ['name', 'height', 'type', 'weaknesses'];
 
    function getALL() {
        return pokemonList;
+   };
+
+   function showDetails(pokemon) {
+       console.log(pokemon.name)
+   }
+// Create seperate function for addEventListner outside of addListItem later
+
+   function addListItem(pokemon) {
+       let pokemonList = document.querySelector('.pokemon-list');
+       let listItem = document.createElement('li');
+       let button = document.createElement('button');
+       button.addEventListener('click', function() {
+           showDetails(pokemon);
+       });
+       button.innerText = pokemon.name;
+       button.classList.add('button-class');
+       listItem.appendChild(button);
+       pokemonList.appendChild(listItem);
    }
 
    return {
        add: add,
-       getALL: getALL
+       getALL: getALL,
+       addListItem: addListItem
    };
 })();
 
 pokemonRepository.getALL().forEach(function (pokemon) {
-    if (pokemon.height > 2) {
-        document.write('<p>' + pokemon.name + '(height: ' + pokemon.height + ', That\'s pretty big.)</p>'); 
-    }else if (pokemon.height < 2) {
-        document.write('<p>' + pokemon.name + '(height: ' + pokemon.height + ', That\'s kind of small.)</p>');
-    }else{
-        document.write('<p>' + pokemon.name + '(height: ' + pokemon.height + ')</p>');
-    }
+    pokemonRepository.addListItem(pokemon);
   })()

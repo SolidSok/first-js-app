@@ -2,16 +2,6 @@ let pokemonRepository = (function () {
     let pokemonList = [];
     let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
-    // Something in this code messed up, using repl's version until I have figured it out
-    // function add(pokemon) {
-    //    if ((typeof pokemon === 'object') && (object.keys(pokemon).every((element, i) => element === pokemonKeys[i]))) {
-    //     pokemonList.push(pokemon);
-    //    } else {
-    //        console.log('pokemon is not correct')
-    //    }
-    // };
-    // let pokemonKeys = ['name'];
-
     function add(pokemon) {
         if (
           typeof pokemon === "object" &&
@@ -27,18 +17,12 @@ let pokemonRepository = (function () {
        return pokemonList;
     };
 
-    function showDetails(pokemon) {
-       console.log(pokemon.name)
-    }
-    
 // Create seperate function for addEventListner outside of addListItem later
     function addListItem(pokemon) {
        let pokemonList = document.querySelector('.pokemon-list');
        let listItem = document.createElement('li');
        let button = document.createElement('button');
-       button.addEventListener('click', function(event) {
-           showDetails(pokemon);
-       });
+       button.addEventListener('click', (event) => showDetails(pokemon));
        button.innerText = pokemon.name;
        button.classList.add('button-class');
        listItem.appendChild(button);
@@ -67,9 +51,8 @@ let pokemonRepository = (function () {
         return fetch(url).then(function (response) {
             return response.json();
         }).then(function (details) {
-            // we add details to the item here
             item.imageUrl = details.sprites.front_default;
-            item.height = details. height;
+            item.height = details.height;
             item.types = details.types;
         }).catch(function (e) {
             console.error(e);
@@ -79,17 +62,86 @@ let pokemonRepository = (function () {
     // details won't show without this
     function showDetails(pokemon) {
         pokemonRepository.loadDetails(pokemon).then(function () {
-            console.log(pokemon);
+            showModal(pokemon);
         })
     };
 
+
+
+
+    function showModal(pokemon) {
+        let modalContainer = document.querySelector('#modal-container');
+
+        modalContainer.innerHTML = '';
+
+        let modal = document.createElement('div');
+        modal.classList.add('modal');
+
+        
+        //Close button to exit modal
+        let closeButtonElement = document.createElement('button');
+        closeButtonElement.classList.add('modal-close');
+        closeButtonElement.innerText = 'close';
+        closeButtonElement.addEventListener('click', hideModal);
+
+        //Escape key to exit modal
+        window.addEventListener('keydown', (e) => {
+            let modalContainer = document.querySelector('#modal-container');
+            if (e.key === 'Escape' && modalContainer.classList.containers('is-visible')) {
+                hideModal();
+            }
+        });
+
+        //Click outside modal to close
+        modalContainer.addEventListener('click', (e) => {
+            let target = e.target;
+            if (target === modalContainer) {
+                hideModal();
+            }
+        });
+
+        //name
+        let titleElement = document.createElement('h1');
+        titleElement.innerText = pokemon.name;
+
+        //picture
+        let imgElement = document.createElement('img');
+        imgElement.src = pokemon.imageUrl;
+        imgElement.classList.add('modal-image');
+        
+        //details
+        let contentElement = document.createElement('p');
+        contentElement.innerText = `Height: ${pokemon.height}`;
+
+
+
+        modal.appendChild(closeButtonElement);
+        modal.appendChild(titleElement);
+        modal.appendChild(contentElement);
+        modal.appendChild(imgElement);
+        modalContainer.appendChild(modal);
+
+        modalContainer.classList.add('is-visible');
+    }
+
+    function hideModal() {
+        let modalContainer = document.querySelector('#modal-container');
+        modalContainer.classList.remove('is-visible');
+    }
+
+    // document.querySelector('#show-modal').addEventListener('click', () => {
+    //     showModal('This is my title', 'You can escape now!');
+    // });
+
+
+
     return {
-       add: add,
-       getALL: getALL,
-       addListItem: addListItem,
-       loadList: loadList,
-       loadDetails: loadDetails,
-       showDetails: showDetails
+        add: add,
+        getALL: getALL,
+        addListItem: addListItem,
+        loadList: loadList,
+        loadDetails: loadDetails,
+        showDetails: showDetails
     };
 })();
 

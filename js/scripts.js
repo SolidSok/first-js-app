@@ -85,6 +85,7 @@ let pokemonRepository = (function () {
             showModal(pokemon);
         })
     };
+    
 
 
 
@@ -105,9 +106,9 @@ let pokemonRepository = (function () {
         let imageElementBack =$('<img class="modal-img" style="width:50%">');
         imageElementBack.attr("src", pokemon.imageUrlBack);
 
-        let heightElement = $('<p>' + 'height: ' + pokemon.height + '</p>');
+        let heightElement = $('<p>' + 'height: ' + pokemon.height + ' dm' + '</p>');
 
-        let weightElement = $('<p>' + 'weight: ' + pokemon.weight + '</p>');
+        let weightElement = $('<p>' + 'weight: ' + pokemon.weight + ' hg' + '</p>');
 
         let typesElement = $('<p>' + 'types: ' + pokemon.types + '</p>');
 

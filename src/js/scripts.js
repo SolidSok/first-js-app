@@ -34,7 +34,7 @@ let pokemonRepository = (function () {
   }
 
   function clickEvent(button, pokemon) {
-    button.addEventListener('click', (event) => showDetails(pokemon));
+    button.addEventListener('click', event => showDetails(pokemon));
   }
 
   // add loading message bonus task later
@@ -72,10 +72,10 @@ let pokemonRepository = (function () {
         item.abilities = details.abilities;
 
         let types = [];
-        details.types.forEach((pokemon) => types.push(pokemon.type.name));
+        details.types.forEach(pokemon => types.push(pokemon.type.name));
         item.types = types;
         let abilities = [];
-        details.abilities.forEach((pokemon) =>
+        details.abilities.forEach(pokemon =>
           abilities.push(pokemon.ability.name)
         );
         item.abilities = abilities;
@@ -129,19 +129,6 @@ let pokemonRepository = (function () {
     modalBody.append(abilitiesElement);
   }
 
-  // function pokeSearch() {
-  //   let search = $('input').val();
-  //   let pokelist = $('.pokemon-search');
-  //   pokelist.each(function () {
-  //     let item = $(this);
-  //     let name = item.text();
-  //     if (name.includes(search)) {
-  //       item.show();
-  //     } else {
-  //       item.hide();
-  //     }
-  //   });
-  // }
   function pokeSearch() {
     let search = $('input').val();
     let pokelist = $('li');

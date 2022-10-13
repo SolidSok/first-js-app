@@ -8,5 +8,10 @@ This application uses HTML, CSS, and Javascript to load pokemon data from an ext
 * jQuery
 * Bootstrap
 
+### Install
+
+```
+git clone https://github.com/SolidSok/first-js-app.git
+
 ###### Author
 @SolidSok
